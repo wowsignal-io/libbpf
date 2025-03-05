@@ -342,8 +342,8 @@ int ring_buffer__consume_ring(struct ring_buffer *rb, uint32_t ring_id)
 	if (ring_id >= rb->ring_cnt)
 		return libbpf_err(-EINVAL);
 
-	ring = &rb->rings[ring_id];
-	res = ringbuf_process_ring(ring);
+	ring = rb->rings[ring_id];
+	res = ringbuf_process_ring(ring, INT_MAX);
 	if (res < 0)
 		return libbpf_err(res);
 
